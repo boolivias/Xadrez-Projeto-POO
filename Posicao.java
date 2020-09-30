@@ -4,8 +4,8 @@ public class Posicao {
     private int coluna;
     private char cor;
 
-    public Posicao(char linha, int coluna, char cor) {
-        this.linha = linha;
+    public Posicao(int linha, int coluna, char cor) {
+        this.linha = (char) linha;
         this.coluna = coluna;
         this.cor = cor;
         this.indexPecaPresente = -1;
