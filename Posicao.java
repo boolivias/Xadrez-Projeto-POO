@@ -1,22 +1,22 @@
 public class Posicao {
     private int indexPecaPresente;
-    private char linha;
-    private int coluna;
+    private char coluna;
+    private int linha;
     private char cor;
 
-    public Posicao(int linha, int coluna, char cor) {
-        this.linha = (char) linha;
-        this.coluna = coluna;
+    public Posicao(int coluna, int linha, char cor) {
+        this.coluna = (char) coluna;
+        this.linha = linha;
         this.cor = cor;
         this.indexPecaPresente = -1;
     }
 
-    public char getLinha() {
-        return this.linha;
+    public char getcoluna() {
+        return this.coluna;
     }
 
     public int getColuna() {
-        return this.coluna;
+        return this.linha;
     }
 
     public char getCor() {
