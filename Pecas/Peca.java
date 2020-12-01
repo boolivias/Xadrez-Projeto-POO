@@ -1,10 +1,10 @@
 package Pecas;
 
-public abstract class Pecas {
+public abstract class Peca {
     protected char cor;
     protected boolean ativo;
 
-    public Pecas(char cor) {
+    public Peca(char cor) {
         this.ativo = true;
         this.cor = cor;
     }
