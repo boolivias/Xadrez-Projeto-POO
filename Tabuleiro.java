@@ -1,3 +1,4 @@
+import Pecas.Peca;
 import Util.Constantes;
 
 public class Tabuleiro {
@@ -17,11 +18,18 @@ public class Tabuleiro {
         }
     }
 
-    public boolean checaMovimento(int linhaDestino, char colunaDestino) {
-        if (colunaDestino >= 'A' && colunaDestino <= 'H' && linhaDestino >= 1 && linhaDestino <= 8)
-            return true;
-        else
+    public boolean checaMovimento(int linhaOrigem, char colunaOrigem, int linhaDestino, char colunaDestino) {
+        if (colunaDestino <= 'A' || colunaDestino >= 'H' || linhaDestino <= 1 || linhaDestino >= 8)
             return false;
+
+        Peca p = this.posicao[linhaOrigem][colunaOrigem].getPecaPresente();
+
+        if (!p.checaMovimento(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino))
+            return false;
+
+        //////////////////////////// VERIFICAR SE NÃO HÁ PEÇAS NO CAMINHO
+
+        return true;
     }
 
     public void imprimir() {
