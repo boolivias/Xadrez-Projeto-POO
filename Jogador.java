@@ -27,12 +27,4 @@ public class Jogador {
     public String getNome() {
         return this.nome;
     }
-
-    public void setCor(char cor) {
-        this.cor = cor;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
 }
