@@ -2,27 +2,16 @@ package Pecas;
 
 import Util.Constantes;
 
-public class Peao {
-    private char cor;
-    private boolean ativo;
+public class Peao extends Peca {
     private boolean primeiroMovimento;
 
     public Peao(char cor) {
+        super(cor);
         this.primeiroMovimento = true;
-        this.ativo = true;
-        this.cor = cor;
-    }
-
-    public boolean estaAtivo() {
-        return this.ativo;
-    }
-
-    public void desativa() {
-        this.ativo = false;
     }
 
     public char desenho() {
-        return cor == Constantes.COR_PRETO ? Constantes.P_UNICODE_PEAO : Constantes.B_UNICODE_PEAO;
+        return this.cor == Constantes.COR_PRETO ? Constantes.P_UNICODE_PEAO : Constantes.B_UNICODE_PEAO;
     }
 
     public boolean checaMovimento(int linhaOrigem, char colunaOrigem, int linhaDestino, char colunaDestino) {

@@ -2,25 +2,13 @@ package Pecas;
 
 import Util.Constantes;
 
-public class Cavalo {
-    private char cor;
-    private boolean ativo;
-
+public class Cavalo extends Peca {
     public Cavalo(char cor) {
-        this.ativo = true;
-        this.cor = cor;
-    }
-
-    public boolean estaAtivo() {
-        return this.ativo;
-    }
-
-    public void desativa() {
-        this.ativo = false;
+        super(cor);
     }
 
     public char desenho() {
-        return cor == Constantes.COR_PRETO ? Constantes.P_UNICODE_CAVALO : Constantes.B_UNICODE_CAVALO;
+        return this.cor == Constantes.COR_PRETO ? Constantes.P_UNICODE_CAVALO : Constantes.B_UNICODE_CAVALO;
     }
 
     public boolean checaMovimento(int linhaOrigem, char colunaOrigem, int linhaDestino, char colunaDestino) {

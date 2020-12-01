@@ -2,21 +2,9 @@ package Pecas;
 
 import Util.Constantes;
 
-public class Bispo {
-    private char cor;
-    private boolean ativo;
-
+public class Bispo extends Peca {
     public Bispo(char cor) {
-        this.ativo = true;
-        this.cor = cor;
-    }
-
-    public boolean estaAtivo() {
-        return this.ativo;
-    }
-
-    public void desativa() {
-        this.ativo = false;
+        super(cor);
     }
 
     public char desenho() {
