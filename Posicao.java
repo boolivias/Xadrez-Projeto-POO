@@ -15,6 +15,10 @@ public class Posicao {
         this._constructor(linha, coluna, cor, peca);
     }
 
+    public Peca getPecaPresente() {
+        return this.pecaPresente;
+    }
+
     private void _constructor(int linha, int coluna, char cor, Peca peca) {
         this.coluna = (char) coluna;
         this.linha = linha;
