@@ -32,6 +32,24 @@ public class Tabuleiro {
         return true;
     }
 
+    public void definePecaPosicao(int linhaDestino, char colunaDestino, Peca p) {
+        this.definePecaPosicao(linhaDestino, Constantes.A_ASCII - Character.toUpperCase(colunaDestino), p);
+    }
+
+    public void definePecaPosicao(int linhaOrigem, char colunaOrigem, int linhaDestino, char colunaDestino, Peca p) {
+        this.definePecaPosicao(linhaOrigem, Constantes.A_ASCII - Character.toUpperCase(colunaOrigem), linhaDestino,
+                Constantes.A_ASCII - Character.toUpperCase(colunaDestino), p);
+    }
+
+    public void definePecaPosicao(int linhaDestino, int colunaDestino, Peca p) {
+        this.posicao[linhaDestino][colunaDestino].ocupa(p);
+    }
+
+    public void definePecaPosicao(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino, Peca p) {
+        this.definePecaPosicao(linhaDestino, colunaDestino, p);
+        this.posicao[linhaOrigem][colunaOrigem].desocupa();
+    }
+
     public void imprimir() {
         // Impressão superior dos indices das colunas
         System.out.print("\t");
