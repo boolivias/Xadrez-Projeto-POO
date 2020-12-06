@@ -37,23 +37,23 @@ public class Jogo {
         // "i" é usado para determinar "pulo" no indice do vetor
         for (int i = 0; i < 2; i++) {
             // Pulo entre as pecas pretas e brancas
-            i *= 8;
-
-            for (int j = 0; j < 8; j++) {
-                peca[j + i] = new Peao(cor);
-            }
+            i *= 16;
 
             for (int j = 0; j < 2; j++) {
                 // Pulo entre as peças que se repetem
-                j *= 3;
+                j *= 5;
 
-                peca[(8 + j) + i] = new Torre(cor);
-                peca[(9 + j) + i] = new Cavalo(cor);
-                peca[(10 + j) + i] = new Bispo(cor);
+                peca[(0 + j) + i] = new Torre(cor);
+                peca[(1 + j) + i] = new Cavalo(cor);
+                peca[(2 + j) + i] = new Bispo(cor);
             }
 
-            peca[14 + i] = new Dama(cor);
-            peca[15 + i] = new Rei(cor);
+            peca[3 + i] = new Rei(cor);
+            peca[4 + i] = new Dama(cor);
+
+            for (int j = 8; j < 16; j++) {
+                peca[j + i] = new Peao(cor);
+            }
 
             cor = Constantes.COR_PRETO;
         }
