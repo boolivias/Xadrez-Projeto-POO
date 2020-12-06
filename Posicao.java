@@ -19,6 +19,14 @@ public class Posicao {
         return this.pecaPresente;
     }
 
+    public void ocupa(Peca p) {
+        this.pecaPresente = p;
+    }
+
+    public void desocupa() {
+        this.pecaPresente = null;
+    }
+
     private void _constructor(int linha, int coluna, char cor, Peca peca) {
         this.coluna = (char) coluna;
         this.linha = linha;
