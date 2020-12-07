@@ -15,6 +15,13 @@ public class HelperPadrao {
         return Constantes.A_ASCII - padronizaCharColuna(col);
     }
 
+    public static char padronizaCor(char cor) {
+        if (cor == 'p' || cor == 'P')
+            return Constantes.COR_PRETO;
+        else
+            return Constantes.COR_BRANCO;
+    }
+
     public static boolean ehBranco(char cor) {
         return Character.toLowerCase(cor) == Constantes.COR_BRANCO;
     }
