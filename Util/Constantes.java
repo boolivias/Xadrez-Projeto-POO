@@ -20,8 +20,8 @@ public class Constantes {
     public final static char B_UNICODE_CAVALO = '\u265E';
     public final static char P_UNICODE_CAVALO = '\u2658';
 
-    public final static char B_UNICODE_DAMA = '\u265F';
-    public final static char P_UNICODE_DAMA = '\u2659';
+    public final static char B_UNICODE_DAMA = '\u265B';
+    public final static char P_UNICODE_DAMA = '\u2655';
 
     public final static char B_UNICODE_PEAO = '\u265F';
     public final static char P_UNICODE_PEAO = '\u2659';
