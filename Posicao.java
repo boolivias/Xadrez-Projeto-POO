@@ -1,5 +1,6 @@
 import Pecas.Peca;
 import Util.Constantes;
+import Util.HelperPadrao;
 
 public class Posicao {
     private char coluna;
@@ -30,12 +31,12 @@ public class Posicao {
     private void _constructor(int linha, int coluna, char cor, Peca peca) {
         this.coluna = (char) coluna;
         this.linha = linha;
-        this.cor = cor;
+        this.cor = HelperPadrao.padronizaCor(cor);
         this.pecaPresente = peca;
     }
 
     public void imprimir() {
-        System.out.print(this.cor == Constantes.COR_PRETO ? Constantes.BG_PRETO : Constantes.BG_BRANCO);
+        System.out.print(HelperPadrao.ehBranco(this.cor) ? Constantes.BG_BRANCO : Constantes.BG_PRETO);
 
         System.out.print(" ");
         System.out.print(pecaPresente != null ? pecaPresente.desenho() : " ");

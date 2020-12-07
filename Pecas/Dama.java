@@ -1,6 +1,7 @@
 package Pecas;
 
 import Util.Constantes;
+import Util.HelperPadrao;
 
 public class Dama extends Peca {
     public Dama(char cor) {
@@ -8,12 +9,12 @@ public class Dama extends Peca {
     }
 
     public char desenho() {
-        return this.cor == Constantes.COR_PRETO ? Constantes.P_UNICODE_DAMA : Constantes.B_UNICODE_DAMA;
+        return HelperPadrao.ehBranco(cor) ? Constantes.B_UNICODE_DAMA : Constantes.P_UNICODE_DAMA;
     }
 
     public boolean checaMovimento(int linhaOrigem, char colunaOrigem, int linhaDestino, char colunaDestino) {
         int diffLinha = linhaOrigem - linhaDestino;
-        int diffColuna = (int) (colunaOrigem) - (int) (colunaDestino);
+        int diffColuna = HelperPadrao.colunaCharToInt(colunaOrigem) - HelperPadrao.colunaCharToInt(colunaDestino);
         int res = Math.abs(Math.abs(diffLinha) - Math.abs(diffColuna));
 
         // Verifica se o movimento foi na diagonal ou

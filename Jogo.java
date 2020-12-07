@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import Pecas.*;
 import Util.Constantes;
+import Util.HelperPadrao;
 
 public class Jogo {
     private Tabuleiro tabuleiro;
@@ -14,10 +15,10 @@ public class Jogo {
         Peca[] pBrancas = Arrays.copyOfRange(this.pecas, 0, 15);
         Peca[] pPretas = Arrays.copyOfRange(this.pecas, 16, 32);
         this.jogadores = new Jogador[2];
-        jogadores[0] = new Jogador(nomeJogador1, corJogador1,
-                corJogador1 == Constantes.COR_BRANCO ? pBrancas : pPretas);
-        jogadores[1] = new Jogador(nomeJogador2, corJogador2,
-                corJogador2 == Constantes.COR_BRANCO ? pBrancas : pPretas);
+        jogadores[0] = new Jogador(nomeJogador1, HelperPadrao.padronizaCor(corJogador1),
+                HelperPadrao.ehBranco(corJogador1) ? pBrancas : pPretas);
+        jogadores[1] = new Jogador(nomeJogador2, HelperPadrao.padronizaCor(corJogador2),
+                HelperPadrao.ehBranco(corJogador2) ? pBrancas : pPretas);
         this.vezJogador = 0;
         this.tabuleiro = new Tabuleiro();
         posicionaPecas();

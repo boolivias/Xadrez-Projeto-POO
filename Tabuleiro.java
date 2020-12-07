@@ -1,5 +1,6 @@
 import Pecas.Peca;
 import Util.Constantes;
+import Util.HelperPadrao;
 
 public class Tabuleiro {
     private Posicao[][] posicao;
@@ -10,7 +11,7 @@ public class Tabuleiro {
         char cor = Constantes.COR_BRANCO;
         for (int i = 7; i >= 0; i--) {
             for (int j = 0; j < 8; j++) {
-                this.posicao[i][j] = new Posicao(i, Constantes.A_ASCII + j, cor);
+                this.posicao[i][j] = new Posicao(i, HelperPadrao.colunaIntToChar(j), cor);
                 cor = inverteCor(cor);
             }
             // O primeiro quadrado da linha é da mesma cor que o ultimo da linha anterior
@@ -19,7 +20,8 @@ public class Tabuleiro {
     }
 
     public boolean checaMovimento(int linhaOrigem, char colunaOrigem, int linhaDestino, char colunaDestino) {
-        if (colunaDestino <= 'A' || colunaDestino >= 'H' || linhaDestino <= 1 || linhaDestino >= 8)
+        if (colunaDestino <= HelperPadrao.padronizaCharColuna('A')
+                || colunaDestino >= HelperPadrao.padronizaCharColuna('H') || linhaDestino <= 1 || linhaDestino >= 8)
             return false;
 
         Peca p = this.posicao[linhaOrigem][colunaOrigem].getPecaPresente();
@@ -33,11 +35,11 @@ public class Tabuleiro {
     }
 
     public void definePecaPosicao(int linhaDestino, char colunaDestino, Peca p) {
-        this.definePecaPosicao(linhaDestino, Constantes.A_ASCII - Character.toUpperCase(colunaDestino), p);
+        this.definePecaPosicao(linhaDestino, HelperPadrao.colunaCharToInt(colunaDestino), p);
     }
 
     public void definePecaPosicao(int linhaOrigem, char colunaOrigem, int linhaDestino, char colunaDestino, Peca p) {
-        this.definePecaPosicao(linhaOrigem, Constantes.A_ASCII - Character.toUpperCase(colunaOrigem), linhaDestino,
+        this.definePecaPosicao(linhaOrigem, HelperPadrao.colunaCharToInt(colunaOrigem), linhaDestino,
                 Constantes.A_ASCII - Character.toUpperCase(colunaDestino), p);
     }
 
@@ -54,7 +56,7 @@ public class Tabuleiro {
         // Impressão superior dos indices das colunas
         System.out.print("\t");
         for (int i = 0; i < 8; i++) {
-            System.out.print(" " + (char) (i + Constantes.A_ASCII) + " ");
+            System.out.print(" " + HelperPadrao.colunaIntToChar(i) + " ");
         }
         System.out.print("\n");
 
@@ -69,12 +71,12 @@ public class Tabuleiro {
         // Impressão inferior dos indices das colunas
         System.out.print("\t");
         for (int i = 0; i < 8; i++) {
-            System.out.print(" " + (char) (i + Constantes.A_ASCII) + " ");
+            System.out.print(" " + HelperPadrao.colunaIntToChar(i) + " ");
         }
         System.out.print("\n\n");
     }
 
     private char inverteCor(char cor) {
-        return cor == Constantes.COR_BRANCO ? Constantes.COR_PRETO : Constantes.COR_BRANCO;
+        return HelperPadrao.ehBranco(cor) ? Constantes.COR_PRETO : Constantes.COR_BRANCO;
     }
 }
