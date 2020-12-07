@@ -8,7 +8,7 @@ public class Tabuleiro {
         this.posicao = new Posicao[8][8];
 
         char cor = Constantes.COR_BRANCO;
-        for (int i = 0; i < 8; i++) {
+        for (int i = 7; i >= 0; i--) {
             for (int j = 0; j < 8; j++) {
                 this.posicao[i][j] = new Posicao(i, Constantes.A_ASCII + j, cor);
                 cor = inverteCor(cor);
@@ -58,7 +58,7 @@ public class Tabuleiro {
         }
         System.out.print("\n");
 
-        for (int i = 0; i < 8; i++) {
+        for (int i = 7; i >= 0; i--) {
             System.out.print((i + 1) + "\t"); // Impressão dos indices das linhas no lado esquerdo
             for (int j = 0; j < 8; j++) {
                 this.posicao[i][j].imprimir();
