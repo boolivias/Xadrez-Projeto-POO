@@ -11,6 +11,10 @@ public class HelperPadrao {
         return padronizaCharColuna((char) (col + Constantes.A_ASCII));
     }
 
+    public static int colunaCharToInt(char col) {
+        return Constantes.A_ASCII - padronizaCharColuna(col);
+    }
+
     public static boolean ehBranco(char cor) {
         return Character.toLowerCase(cor) == Constantes.COR_BRANCO;
     }
