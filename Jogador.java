@@ -1,23 +1,14 @@
+import Pecas.Peca;
+
 public class Jogador {
     private String nome;
     private char cor;
+    private Peca pecas[];
 
-    /**
-     * A classe peça só será implementada na segunda parte do projeto
-     */
-    // private int[] indexPecas;
-
-    // public int[] pecasAtivas(Peca[] pecas) {
-    /**
-     * percorre a lista de pecas de acordo com os valores em indexPecas chamando o
-     * método estaAtivo da peca, armazenando o index de todas as pecas ativas e
-     * retornando o vetor com o index de todas as pecas ativas
-     */
-    // }
-
-    public Jogador(String nome, char cor) {
+    public Jogador(String nome, char cor, Peca p[]) {
         this.nome = nome;
         this.cor = cor;
+        this.pecas = p;
     }
 
     public char getCor() {
