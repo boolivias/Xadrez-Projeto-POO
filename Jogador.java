@@ -1,3 +1,11 @@
+
+/**
+ * Classe Jogador
+ * Classe responsável por realizar todas as ações e armazenar as informações do jogador
+ * 
+ * @author Jean Wylmer Flores Mendoza
+ */
+
 import Pecas.Peca;
 
 public class Jogador {

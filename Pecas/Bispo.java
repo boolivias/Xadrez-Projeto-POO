@@ -1,5 +1,11 @@
 package Pecas;
 
+/**Classe Bispo
+ * Classe responsável por definir as "particularidades" da peça Bispo de Xadrez
+ * 
+ * @author Jean Wylmer Flores Mendoza
+ */
+
 import Util.Constantes;
 import Util.HelperPadrao;
 

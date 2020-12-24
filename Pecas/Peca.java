@@ -1,5 +1,11 @@
 package Pecas;
 
+/**Classe Peça
+ * Classe responsável por definir o "básico" e o comum das peças de Xadrez
+ * 
+ * @author Jean Wylmer Flores Mendoza
+ */
+
 import Util.HelperPadrao;
 
 public abstract class Peca {

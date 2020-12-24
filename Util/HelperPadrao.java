@@ -1,5 +1,9 @@
 package Util;
 
+/**Classe responsável por padronizar e auxiliar as comparações e conversões
+ * @author Jean Wylmer Flores Mendoza
+ */
+
 import Util.Constantes;
 
 public class HelperPadrao {

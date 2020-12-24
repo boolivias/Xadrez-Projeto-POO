@@ -1,5 +1,11 @@
 package Pecas;
 
+/**Classe Cavalo
+ * Classe responsável por definir as "particularidades" da peça Cavalo de Xadrez
+ * 
+ * @author Jean Wylmer Flores Mendoza
+ */
+
 import Util.Constantes;
 import Util.HelperPadrao;
 

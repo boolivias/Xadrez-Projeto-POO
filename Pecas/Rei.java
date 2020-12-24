@@ -1,5 +1,11 @@
 package Pecas;
 
+/**Classe Rei
+ * Classe responsável por definir as "particularidades" da peça Rei de Xadrez
+ * 
+ * @author Jean Wylmer Flores Mendoza
+ */
+
 import Util.Constantes;
 import Util.HelperPadrao;
 

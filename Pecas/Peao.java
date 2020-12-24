@@ -1,5 +1,11 @@
 package Pecas;
 
+/**Classe Peao
+ * Classe responsável por definir as "particularidades" da peça Peao de Xadrez
+ * 
+ * @author Jean Wylmer Flores Mendoza
+ */
+
 import Util.Constantes;
 import Util.HelperPadrao;
 

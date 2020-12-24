@@ -1,3 +1,10 @@
+
+/**Classe Posição
+ * Classe responsável por "simular" uma posição do tabuleiro de xadrez
+ * 
+ * @author Jean Wylmer Flores Mendoza
+ */
+
 import Pecas.Peca;
 import Util.Constantes;
 import Util.HelperPadrao;
@@ -28,6 +35,14 @@ public class Posicao {
         this.pecaPresente = null;
     }
 
+    /**
+     * Método chamado pelos construtores para definir os valores do atributo
+     * 
+     * @param linha  <code>int</code> - Linha da posição
+     * @param coluna <code>int</code> - Coluna da posição
+     * @param cor    <code>char</code> - Cor da posição
+     * @param peca   <code>peca</code> - Peça presente na posição
+     */
     private void _constructor(int linha, int coluna, char cor, Peca peca) {
         this.coluna = (char) coluna;
         this.linha = linha;

@@ -1,3 +1,12 @@
+
+/**
+ * Classe Jogo
+ * Classe responsável por ter uma visão "geral" do jogo, realiza também as "conexões",
+ * tudo que acontece no jogo deve partir dessa classe.
+ * 
+ * @author Jean Wylmer Flores Mendoza
+ */
+
 import java.util.Arrays;
 import Pecas.*;
 import Util.Constantes;
@@ -33,6 +42,12 @@ public class Jogo {
         this.vezJogador = this.vezJogador == 1 ? 0 : 1;
     }
 
+    /**
+     * Cria a instância das peças brancas e pretas, uma alteração neste método pode
+     * quebrar o posicionamento inicial das peças
+     * 
+     * @return Peca
+     */
     private Peca[] criaPecas() {
         Peca[] peca = new Peca[32];
         char cor = Constantes.COR_BRANCO;
@@ -62,12 +77,15 @@ public class Jogo {
         return peca;
     }
 
+    /**
+     * Posiciona as peças na posição inicial do jogo
+     */
     private void posicionaPecas() {
         int lin = 0;
         int indexPecas = 0;
         while (true) {
             for (int col = 0; col < 8; col++) {
-                this.tabuleiro.definePecaPosicao(lin, col, this.pecas[indexPecas++]);
+                this.tabuleiro.definePecaPosicao(lin, HelperPadrao.colunaIntToChar(col), this.pecas[indexPecas++]);
             }
 
             if (lin == 0)

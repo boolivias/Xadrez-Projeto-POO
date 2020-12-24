@@ -1,5 +1,11 @@
 package Util;
 
+/**
+ * Classe responsável por definir os valores padrões de cores, unicodes e ascii
+ * 
+ * @author Jean Wylmer Flores Mendoza
+ */
+
 public class Constantes {
     // ---------------> Código ascii das letras
     public final static int A_ASCII = (int) 'A';

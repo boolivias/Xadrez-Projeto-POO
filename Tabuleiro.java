@@ -1,3 +1,11 @@
+
+/**Classe Tabuleiro
+ * Classe responável por criar o "escopo" de um tabuleiro de xadrez,
+ * tendo uma visão das posições do tabuleiro
+ * 
+ * @author Jean Wylmer Flores Mendoza
+ */
+
 import Pecas.Peca;
 import Util.Constantes;
 import Util.HelperPadrao;
@@ -19,6 +27,12 @@ public class Tabuleiro {
         }
     }
 
+    /**
+     * Verifica se o movimento é válido e pode ser realizado
+     * 
+     * @return <code> boolean </code> - <b>true</b> Se movimento válido,
+     *         <b>false</b> se inválido
+     */
     public boolean checaMovimento(int linhaOrigem, char colunaOrigem, int linhaDestino, char colunaDestino) {
         if (colunaDestino <= HelperPadrao.padronizaCharColuna('A')
                 || colunaDestino >= HelperPadrao.padronizaCharColuna('H') || linhaDestino <= 1 || linhaDestino >= 8)
@@ -34,22 +48,39 @@ public class Tabuleiro {
         return true;
     }
 
+    /**
+     * Desocupa a posição
+     * 
+     * @param linhaDestino  <code>int</code> - Linha da posição a ser desocupada
+     * @param colunaDestino <code>int</code> - Coluna da posição a ser desocupada
+     */
+    public void definePecaPosicao(int linhaDestino, int colunaDestino) {
+        this.posicao[linhaDestino][colunaDestino].desocupa();
+    }
+
+    /**
+     * Ocupa a posição com a peça passada por parâmetro
+     * 
+     * @param linhaDestino  <code>int</code> - Linha da posição a ser ocupada
+     * @param colunaDestino <code>char</code> - Coluna da posição a ser ocupada
+     * @param p             <code>Peca</code> - Peça a ocupar a posição
+     */
     public void definePecaPosicao(int linhaDestino, char colunaDestino, Peca p) {
-        this.definePecaPosicao(linhaDestino, HelperPadrao.colunaCharToInt(colunaDestino), p);
+        this.posicao[linhaDestino][HelperPadrao.colunaCharToInt(colunaDestino)].ocupa(p);
     }
 
-    public void definePecaPosicao(int linhaOrigem, char colunaOrigem, int linhaDestino, char colunaDestino, Peca p) {
-        this.definePecaPosicao(linhaOrigem, HelperPadrao.colunaCharToInt(colunaOrigem), linhaDestino,
-                Constantes.A_ASCII - Character.toUpperCase(colunaDestino), p);
-    }
-
-    public void definePecaPosicao(int linhaDestino, int colunaDestino, Peca p) {
-        this.posicao[linhaDestino][colunaDestino].ocupa(p);
-    }
-
-    public void definePecaPosicao(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino, Peca p) {
-        this.definePecaPosicao(linhaDestino, colunaDestino, p);
-        this.posicao[linhaOrigem][colunaOrigem].desocupa();
+    /**
+     * Movimenta a peça da posição especificada
+     * 
+     * @param linhaOrigem   <code>int</code> - Linha da posição onde está a peça
+     * @param colunaOrigem  <code>char</code> - Coluna da posição onde está a peça
+     * @param linhaDestino  <code>int</code> - Linha da posição destino da peça
+     * @param colunaDestino <code>char</code> - Coluna da posição destino da peça
+     */
+    public void definePecaPosicao(int linhaOrigem, char colunaOrigem, int linhaDestino, char colunaDestino) {
+        this.definePecaPosicao(linhaDestino, colunaDestino,
+                this.posicao[linhaOrigem][HelperPadrao.colunaCharToInt(colunaOrigem)].getPecaPresente());
+        this.definePecaPosicao(linhaOrigem, colunaOrigem);
     }
 
     public void imprimir() {

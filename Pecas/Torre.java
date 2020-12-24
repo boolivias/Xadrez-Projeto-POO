@@ -1,5 +1,11 @@
 package Pecas;
 
+/**Classe Torre
+ * Classe responsável por definir as "particularidades" da peça Torre de Xadrez
+ * 
+ * @author Jean Wylmer Flores Mendoza
+ */
+
 import Util.Constantes;
 import Util.HelperPadrao;
 
