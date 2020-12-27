@@ -37,13 +37,14 @@ public class Tabuleiro {
         if (!this.dentroLimiteTabuleiro(linhaDestino, colunaDestino))
             return false;
 
-        Peca p = this.posicao[linhaOrigem][colunaOrigem].getPecaPresente();
+        Peca p = this.posicao[linhaOrigem][HelperPadrao.colunaCharToInt(colunaOrigem)].getPecaPresente();
 
         if (!p.checaMovimento(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino))
             return false;
 
         //////////////////////////// VERIFICAR SE NÃO HÁ PEÇAS NO CAMINHO
 
+        this.definePecaPosicao(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino);
         return true;
     }
 

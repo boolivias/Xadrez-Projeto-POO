@@ -7,6 +7,9 @@ package Util;
  */
 
 public class Constantes {
+    // ---------------> Código ascii dos números
+    public final static int ZERO_ASCII = 48;
+
     // ---------------> Código ascii das letras
     public final static int A_ASCII = (int) 'A';
 

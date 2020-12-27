@@ -8,6 +8,7 @@
  */
 
 import java.util.Arrays;
+import java.util.Scanner;
 import Pecas.*;
 import Util.Constantes;
 import Util.HelperPadrao;
@@ -30,8 +31,65 @@ public class Jogo {
                 HelperPadrao.ehBranco(corJogador2) ? pBrancas : pPretas);
         this.vezJogador = 0;
         this.tabuleiro = new Tabuleiro();
-        posicionaPecas();
+        this.posicionaPecas();
         this.status = 0;
+        this.run();
+    }
+
+    /** Começa a execução do jogo, lê as entradas dos jogadores e age de acordo. */
+    public void run() {
+        int op;
+        Scanner sc = new Scanner(System.in);
+        do {
+            System.out.println("Ação do jogador: " + this.vezJogador());
+            System.out.println("\t1 - Realizar uma jogada\n\t0 - Abandonar o Jogo");
+            System.out.print("Escolha uma opção: ");
+            op = sc.nextInt();
+            switch (op) {
+                case 1:
+                    this.jogada();
+                    this.alteraVezJogador();
+                    break;
+
+                default:
+                    break;
+            }
+        } while (op != 0);
+    }
+
+    private void jogada() {
+        Scanner sc = new Scanner(System.in);
+        this.tabuleiro.imprimir();
+        String origem = "00", destino = "00";
+        int linhaOrigem = 0, linhaDestino = 0;
+        char colunaOrigem = 'I', colunaDestino = 'I';
+        boolean movimentou = false;
+        do {
+            while (!this.tabuleiro.temPeca(linhaOrigem, colunaOrigem) || destino.equals("0")) {
+                destino = "00";
+                System.out.print("Digite a posição da peça que quer mover (exemplo: D7): ");
+                origem = sc.next();
+                linhaOrigem = HelperPadrao.linhaCharToInt(origem.charAt(1));
+                colunaOrigem = origem.charAt(0);
+                if (!this.tabuleiro.temPeca(linhaOrigem, colunaOrigem))
+                    System.out.println("Não foi possível encontrar uma peça nessa posição, tente novmante.");
+            }
+
+            System.out.println("Digite:");
+            System.out.println("\t- A posição de destino (exemplo: D7)\n\t- \"0\" para escolher nova peça para mover");
+            destino = sc.next();
+            if (destino.equals("0"))
+                continue;
+
+            linhaDestino = HelperPadrao.linhaCharToInt(destino.charAt(1));
+            colunaDestino = destino.charAt(0);
+
+            movimentou = this.tabuleiro.checaMovimento(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino);
+            if (!movimentou) {
+                System.out.println("Jogada incorreta! Tente novamente.");
+            }
+
+        } while (!movimentou);
     }
 
     public String vezJogador() {

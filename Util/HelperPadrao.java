@@ -19,6 +19,10 @@ public class HelperPadrao {
         return padronizaCharColuna(col) - Constantes.A_ASCII;
     }
 
+    public static int linhaCharToInt(char lin) {
+        return ((int) lin) - Constantes.ZERO_ASCII - 1;
+    }
+
     public static char padronizaCor(char cor) {
         if (cor == 'p' || cor == 'P')
             return Constantes.COR_PRETO;
