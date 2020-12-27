@@ -16,7 +16,7 @@ public class HelperPadrao {
     }
 
     public static int colunaCharToInt(char col) {
-        return Constantes.A_ASCII - padronizaCharColuna(col);
+        return padronizaCharColuna(col) - Constantes.A_ASCII;
     }
 
     public static char padronizaCor(char cor) {
