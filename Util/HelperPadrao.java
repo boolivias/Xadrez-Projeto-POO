@@ -33,4 +33,8 @@ public class HelperPadrao {
     public static boolean ehBranco(char cor) {
         return Character.toLowerCase(cor) == Constantes.COR_BRANCO;
     }
+
+    public static boolean corIgual(char cor1, char cor2) {
+        return padronizaCor(cor1) == padronizaCor(cor2);
+    }
 }
