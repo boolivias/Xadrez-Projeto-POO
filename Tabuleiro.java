@@ -34,8 +34,7 @@ public class Tabuleiro {
      *         <b>false</b> se inválido
      */
     public boolean checaMovimento(int linhaOrigem, char colunaOrigem, int linhaDestino, char colunaDestino) {
-        if (colunaDestino <= HelperPadrao.padronizaCharColuna('A')
-                || colunaDestino >= HelperPadrao.padronizaCharColuna('H') || linhaDestino <= 1 || linhaDestino >= 8)
+        if (!this.dentroLimiteTabuleiro(linhaDestino, colunaDestino))
             return false;
 
         Peca p = this.posicao[linhaOrigem][colunaOrigem].getPecaPresente();
@@ -46,6 +45,12 @@ public class Tabuleiro {
         //////////////////////////// VERIFICAR SE NÃO HÁ PEÇAS NO CAMINHO
 
         return true;
+    }
+
+    private boolean dentroLimiteTabuleiro(int linha, char coluna) {
+        return (HelperPadrao.padronizaCharColuna(coluna) >= HelperPadrao.padronizaCharColuna('A')
+                && HelperPadrao.padronizaCharColuna(coluna) <= HelperPadrao.padronizaCharColuna('H') && linha >= 1
+                && linha <= 8);
     }
 
     /**
