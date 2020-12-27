@@ -49,8 +49,8 @@ public class Tabuleiro {
 
     private boolean dentroLimiteTabuleiro(int linha, char coluna) {
         return (HelperPadrao.padronizaCharColuna(coluna) >= HelperPadrao.padronizaCharColuna('A')
-                && HelperPadrao.padronizaCharColuna(coluna) <= HelperPadrao.padronizaCharColuna('H') && linha >= 1
-                && linha <= 8);
+                && HelperPadrao.padronizaCharColuna(coluna) <= HelperPadrao.padronizaCharColuna('H') && linha >= 0
+                && linha <= 7);
     }
 
     /**
