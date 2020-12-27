@@ -25,6 +25,10 @@ public abstract class Peca {
         this.ativo = false;
     }
 
+    public char getCor() {
+        return this.cor;
+    }
+
     abstract public char desenho();
 
     abstract public boolean checaMovimento(int linhaOrigem, char colunaOrigem, int linhaDestino, char colunaDestino);
