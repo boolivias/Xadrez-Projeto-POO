@@ -35,6 +35,10 @@ public class Posicao {
         this.pecaPresente = null;
     }
 
+    public boolean ehOcupada() {
+        return this.pecaPresente != null;
+    }
+
     /**
      * Método chamado pelos construtores para definir os valores do atributo
      * 
