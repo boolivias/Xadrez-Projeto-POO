@@ -88,6 +88,17 @@ public class Tabuleiro {
         this.definePecaPosicao(linhaOrigem, colunaOrigem);
     }
 
+    /**
+     * Verifica se na posição especificada possui alguma peça
+     * 
+     * @return <code>boolean</code> - <code>true</code> se possui /
+     *         <code>false</code> se vazia.
+     */
+    public boolean temPeca(int linha, char coluna) {
+        return this.dentroLimiteTabuleiro(linha, coluna)
+                && posicao[linha][HelperPadrao.colunaCharToInt(coluna)].ehOcupada();
+    }
+
     public void imprimir() {
         // Impressão superior dos indices das colunas
         System.out.print("\t");
