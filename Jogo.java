@@ -41,7 +41,7 @@ public class Jogo {
         int op;
         Scanner sc = new Scanner(System.in);
         do {
-            System.out.println("Ação do jogador: " + this.vezJogador());
+            System.out.println("Ação do jogador: " + this.vezJogador().getNome());
             System.out.println("\t1 - Realizar uma jogada\n\t0 - Abandonar o Jogo");
             System.out.print("Escolha uma opção: ");
             op = sc.nextInt();
@@ -64,22 +64,25 @@ public class Jogo {
         int linhaOrigem = 0, linhaDestino = 0;
         char colunaOrigem = 'I', colunaDestino = 'I';
         boolean movimentou = false;
+        Peca pecaOrigem = null;
         do {
-            while (!this.tabuleiro.temPeca(linhaOrigem, colunaOrigem) || destino.equals("0")) {
-                destino = "00";
+            while (pecaOrigem == null) {
                 System.out.print("Digite a posição da peça que quer mover (exemplo: D7): ");
                 origem = sc.next();
                 linhaOrigem = HelperPadrao.linhaCharToInt(origem.charAt(1));
                 colunaOrigem = origem.charAt(0);
-                if (!this.tabuleiro.temPeca(linhaOrigem, colunaOrigem))
+                pecaOrigem = this.tabuleiro.temPeca(linhaOrigem, colunaOrigem);
+                if (pecaOrigem == null)
                     System.out.println("Não foi possível encontrar uma peça nessa posição, tente novmante.");
             }
 
             System.out.println("Digite:");
             System.out.println("\t- A posição de destino (exemplo: D7)\n\t- \"0\" para escolher nova peça para mover");
             destino = sc.next();
-            if (destino.equals("0"))
+            if (destino.equals("0")) {
+                pecaOrigem = null;
                 continue;
+            }
 
             linhaDestino = HelperPadrao.linhaCharToInt(destino.charAt(1));
             colunaDestino = destino.charAt(0);

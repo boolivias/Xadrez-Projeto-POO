@@ -90,14 +90,16 @@ public class Tabuleiro {
     }
 
     /**
-     * Verifica se na posição especificada possui alguma peça
+     * Verifica se tem peça na posição passada por parâmetro e retorna a peça
      * 
-     * @return <code>boolean</code> - <code>true</code> se possui /
-     *         <code>false</code> se vazia.
+     * @return <code>Peca</code> - Peça presente / <code>null</code> Se não tiver
+     *         peça
      */
-    public boolean temPeca(int linha, char coluna) {
-        return this.dentroLimiteTabuleiro(linha, coluna)
-                && posicao[linha][HelperPadrao.colunaCharToInt(coluna)].ehOcupada();
+    public Peca temPeca(int linha, char coluna) {
+        return (this.dentroLimiteTabuleiro(linha, coluna)
+                && posicao[linha][HelperPadrao.colunaCharToInt(coluna)].ehOcupada())
+                        ? posicao[linha][HelperPadrao.colunaCharToInt(coluna)].getPecaPresente()
+                        : null;
     }
 
     public void imprimir() {
