@@ -59,8 +59,8 @@ public class Tabuleiro {
      * @param linhaDestino  <code>int</code> - Linha da posição a ser desocupada
      * @param colunaDestino <code>int</code> - Coluna da posição a ser desocupada
      */
-    public void definePecaPosicao(int linhaDestino, int colunaDestino) {
-        this.posicao[linhaDestino][colunaDestino].desocupa();
+    public void definePecaPosicao(int linhaDestino, char colunaDestino) {
+        this.posicao[linhaDestino][HelperPadrao.colunaCharToInt(colunaDestino)].desocupa();
     }
 
     /**
