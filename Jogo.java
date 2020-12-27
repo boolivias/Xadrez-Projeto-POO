@@ -92,8 +92,8 @@ public class Jogo {
         } while (!movimentou);
     }
 
-    public String vezJogador() {
-        return this.jogadores[this.vezJogador].getNome();
+    public Jogador vezJogador() {
+        return this.jogadores[this.vezJogador];
     }
 
     public void alteraVezJogador() {
