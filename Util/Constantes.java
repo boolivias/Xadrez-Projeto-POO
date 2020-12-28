@@ -19,8 +19,8 @@ public class Constantes {
 
     // ---------------> Valores para mudar cor do fundo do terminal
     public final static String BG_RESETA = "\033[0m";
-    public final static String BG_PRETO = "\033[44m";
-    public final static String BG_BRANCO = "\u001B[47m";
+    public final static String BG_PRETO = "\033[48;5;94m";
+    public final static String BG_BRANCO = "\033[48;5;221m";
 
     // ---------------> Unicode das peças
     public final static char B_UNICODE_BISPO = '\u265D';
