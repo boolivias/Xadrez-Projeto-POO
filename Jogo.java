@@ -72,8 +72,10 @@ public class Jogo {
                 linhaOrigem = HelperPadrao.linhaCharToInt(origem.charAt(1));
                 colunaOrigem = origem.charAt(0);
                 pecaOrigem = this.tabuleiro.temPeca(linhaOrigem, colunaOrigem);
-                if (pecaOrigem == null)
+                if (pecaOrigem == null) {
                     System.out.println("Não foi possível encontrar uma peça nessa posição, tente novmante.");
+                    continue;
+                }
                 if (!HelperPadrao.corIgual(pecaOrigem.getCor(), this.vezJogador().getCor())) {
                     pecaOrigem = null;
                     System.out.println("Não é possível movimentar as peças do outro jogador, tente novamente.");
