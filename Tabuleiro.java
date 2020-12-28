@@ -111,8 +111,8 @@ public class Tabuleiro {
     }
 
     private Posicao proximaPosicaoDiagonal(int linhaAtual, char colunaAtual, int linhaDestino, char colunaDestino) {
-        linhaAtual = linhaAtual > linhaDestino ? linhaAtual++ : linhaAtual--;
-        colunaAtual = colunaAtual > colunaDestino ? colunaAtual++ : colunaAtual--;
+        linhaAtual = linhaAtual > linhaDestino ? --linhaAtual : ++linhaAtual;
+        colunaAtual = colunaAtual > colunaDestino ? --colunaAtual : ++colunaAtual;
 
         return this.posicao[linhaAtual][HelperPadrao.colunaCharToInt(colunaAtual)];
     }
@@ -124,8 +124,8 @@ public class Tabuleiro {
 
     private Posicao proximaPosicaoHorizontal(int linhaAtual, char colunaAtual, int linhaDestino, char colunaDestino) {
         return colunaAtual > colunaDestino
-                ? this.posicao[linhaAtual][HelperPadrao.colunaCharToInt((char) (colunaAtual + 1))]
-                : this.posicao[linhaAtual][HelperPadrao.colunaCharToInt((char) (colunaAtual - 1))];
+                ? this.posicao[linhaAtual][HelperPadrao.colunaCharToInt((char) (colunaAtual - 1))]
+                : this.posicao[linhaAtual][HelperPadrao.colunaCharToInt((char) (colunaAtual + 1))];
     }
 
     private boolean dentroLimiteTabuleiro(int linha, char coluna) {
