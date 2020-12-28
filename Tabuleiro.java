@@ -37,7 +37,7 @@ public class Tabuleiro {
         Posicao pos_origem = this.posicao[linhaOrigem][HelperPadrao.colunaCharToInt(colunaOrigem)];
         Posicao pos_destino = this.posicao[linhaDestino][HelperPadrao.colunaCharToInt(colunaDestino)];
 
-        if (!this.dentroLimiteTabuleiro(pos_destino.getLinha(), pos_destino.getColuna()))
+        if (!this.dentroLimiteTabuleiro(pos_destino.getLinha(), pos_destino.getColuna()) || pos_origem == pos_destino)
             return false;
 
         Peca p = pos_origem.getPecaPresente();
