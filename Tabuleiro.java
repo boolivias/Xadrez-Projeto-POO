@@ -56,7 +56,7 @@ public class Tabuleiro {
             Posicao pos_atual = pos_origem;
             do {
                 pos_atual = this.proximaPosicaoCaminho(pos_atual, pos_destino, p);
-                if (pos_atual.ehOcupada())
+                if (pos_atual.ehOcupada() && pos_atual != pos_destino)
                     return false;
             } while (pos_atual != pos_destino);
         }
