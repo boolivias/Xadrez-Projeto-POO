@@ -33,7 +33,7 @@ public class Peao extends Peca {
                     && this.primeiroMovimento) {
                 return true;
             }
-            if ((diffLinha == 1 && HelperPadrao.ehBranco(cor)) || (diffLinha == -1 && !HelperPadrao.ehBranco(cor))) {
+            if ((diffLinha == -1 && HelperPadrao.ehBranco(cor)) || (diffLinha == 1 && !HelperPadrao.ehBranco(cor))) {
                 return true;
             }
         }
