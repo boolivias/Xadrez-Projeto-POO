@@ -6,6 +6,8 @@
  * @author Jean Wylmer Flores Mendoza
  */
 
+import Pecas.Cavalo;
+import Pecas.Peao;
 import Pecas.Peca;
 import Util.Constantes;
 import Util.HelperPadrao;
@@ -50,10 +52,80 @@ public class Tabuleiro {
                 pos_destino.getColuna()))
             return false;
 
+        if (!(p instanceof Cavalo)) { // Cavalo pula as peças no caminho
+            Posicao pos_atual = pos_origem;
+            do {
+                pos_atual = this.proximaPosicaoCaminho(pos_atual, pos_destino, p);
+                if (pos_atual.ehOcupada())
+                    return false;
+            } while (pos_atual != pos_destino);
+        }
+
+        if (p_destino != null) {
+            p_destino.desativa();
+            this.definePecaPosicao(pos_destino.getLinha(), pos_destino.getColuna());
+        }
         this.definePecaPosicao(pos_origem.getLinha(), pos_origem.getColuna(), pos_destino.getLinha(),
                 pos_destino.getColuna());
 
+        if (p instanceof Peao)
+            ((Peao) p).moveu();
+
         return true;
+    }
+
+    private Posicao proximaPosicaoCaminho(Posicao atual, Posicao dest, Peca p) {
+        switch (p.getClass().getName()) {
+            case "Pecas.Bispo":
+                return this.proximaPosicaoDiagonal(atual.getLinha(), atual.getColuna(), dest.getLinha(),
+                        dest.getColuna());
+
+            case "Pecas.Peao":
+                return this.proximaPosicaoVertical(atual.getLinha(), atual.getColuna(), dest.getLinha(),
+                        dest.getColuna());
+
+            case "Pecas.Torre":
+                if (atual.getColuna() == dest.getColuna())
+                    return this.proximaPosicaoVertical(atual.getLinha(), atual.getColuna(), dest.getLinha(),
+                            dest.getColuna());
+                else
+                    return this.proximaPosicaoHorizontal(atual.getLinha(), atual.getColuna(), dest.getLinha(),
+                            dest.getColuna());
+
+            case "Pecas.Rei":
+            case "Pecas.Dama":
+                if (atual.getColuna() == dest.getColuna())
+                    return this.proximaPosicaoVertical(atual.getLinha(), atual.getColuna(), dest.getLinha(),
+                            dest.getColuna());
+                else if (atual.getLinha() == dest.getLinha())
+                    return this.proximaPosicaoHorizontal(atual.getLinha(), atual.getColuna(), dest.getLinha(),
+                            dest.getColuna());
+                else
+                    return this.proximaPosicaoDiagonal(atual.getLinha(), atual.getColuna(), dest.getLinha(),
+                            dest.getColuna());
+
+            default:
+                // ----------------> LANÇAR EXCEPTION
+                return null;
+        }
+    }
+
+    private Posicao proximaPosicaoDiagonal(int linhaAtual, char colunaAtual, int linhaDestino, char colunaDestino) {
+        linhaAtual = linhaAtual > linhaDestino ? linhaAtual++ : linhaAtual--;
+        colunaAtual = colunaAtual > colunaDestino ? colunaAtual++ : colunaAtual--;
+
+        return this.posicao[linhaAtual][HelperPadrao.colunaCharToInt(colunaAtual)];
+    }
+
+    private Posicao proximaPosicaoVertical(int linhaAtual, char colunaAtual, int linhaDestino, char colunaDestino) {
+        return linhaAtual < linhaDestino ? this.posicao[linhaAtual + 1][HelperPadrao.colunaCharToInt(colunaAtual)]
+                : this.posicao[linhaAtual - 1][HelperPadrao.colunaCharToInt(colunaAtual)];
+    }
+
+    private Posicao proximaPosicaoHorizontal(int linhaAtual, char colunaAtual, int linhaDestino, char colunaDestino) {
+        return colunaAtual > colunaDestino
+                ? this.posicao[linhaAtual][HelperPadrao.colunaCharToInt((char) (colunaAtual + 1))]
+                : this.posicao[linhaAtual][HelperPadrao.colunaCharToInt((char) (colunaAtual - 1))];
     }
 
     private boolean dentroLimiteTabuleiro(int linha, char coluna) {
