@@ -34,17 +34,25 @@ public class Tabuleiro {
      *         <b>false</b> se inválido
      */
     public boolean checaMovimento(int linhaOrigem, char colunaOrigem, int linhaDestino, char colunaDestino) {
-        if (!this.dentroLimiteTabuleiro(linhaDestino, colunaDestino))
+        Posicao pos_origem = this.posicao[linhaOrigem][HelperPadrao.colunaCharToInt(colunaOrigem)];
+        Posicao pos_destino = this.posicao[linhaDestino][HelperPadrao.colunaCharToInt(colunaDestino)];
+
+        if (!this.dentroLimiteTabuleiro(pos_destino.getLinha(), pos_destino.getColuna()))
             return false;
 
-        Peca p = this.posicao[linhaOrigem][HelperPadrao.colunaCharToInt(colunaOrigem)].getPecaPresente();
+        Peca p = pos_origem.getPecaPresente();
+        Peca p_destino = pos_destino.getPecaPresente();
 
-        if (!p.checaMovimento(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino))
+        if (p_destino != null && HelperPadrao.corIgual(p.getCor(), p_destino.getCor()))
             return false;
 
-        //////////////////////////// VERIFICAR SE NÃO HÁ PEÇAS NO CAMINHO
+        if (!p.checaMovimento(pos_origem.getLinha(), pos_origem.getColuna(), pos_destino.getLinha(),
+                pos_destino.getColuna()))
+            return false;
 
-        this.definePecaPosicao(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino);
+        this.definePecaPosicao(pos_origem.getLinha(), pos_origem.getColuna(), pos_destino.getLinha(),
+                pos_destino.getColuna());
+
         return true;
     }
 

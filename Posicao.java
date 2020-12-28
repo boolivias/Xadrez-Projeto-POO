@@ -23,6 +23,14 @@ public class Posicao {
         this._constructor(linha, coluna, cor, peca);
     }
 
+    public int getLinha() {
+        return this.linha;
+    }
+
+    public char getColuna() {
+        return this.coluna;
+    }
+
     public Peca getPecaPresente() {
         return this.pecaPresente;
     }
