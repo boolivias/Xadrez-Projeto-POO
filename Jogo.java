@@ -29,7 +29,7 @@ public class Jogo {
                 HelperPadrao.ehBranco(corJogador1) ? pBrancas : pPretas);
         jogadores[1] = new Jogador(nomeJogador2, HelperPadrao.padronizaCor(corJogador2),
                 HelperPadrao.ehBranco(corJogador2) ? pBrancas : pPretas);
-        this.vezJogador = 0;
+        this.vezJogador = HelperPadrao.ehBranco(corJogador1) ? 0 : 1;
         this.tabuleiro = new Tabuleiro();
         this.posicionaPecas();
         this.status = 0;
