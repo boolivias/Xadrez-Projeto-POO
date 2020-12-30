@@ -22,13 +22,9 @@ public class Jogo {
 
     public Jogo(String nomeJogador1, String nomeJogador2, char corJogador1, char corJogador2) {
         this.pecas = criaPecas();
-        Peca[] pBrancas = Arrays.copyOfRange(this.pecas, 0, 15);
-        Peca[] pPretas = Arrays.copyOfRange(this.pecas, 16, 32);
         this.jogadores = new Jogador[2];
-        jogadores[0] = new Jogador(nomeJogador1, HelperPadrao.padronizaCor(corJogador1),
-                HelperPadrao.ehBranco(corJogador1) ? pBrancas : pPretas);
-        jogadores[1] = new Jogador(nomeJogador2, HelperPadrao.padronizaCor(corJogador2),
-                HelperPadrao.ehBranco(corJogador2) ? pBrancas : pPretas);
+        jogadores[0] = new Jogador(nomeJogador1, HelperPadrao.padronizaCor(corJogador1), this.pecasCor(corJogador1));
+        jogadores[1] = new Jogador(nomeJogador2, HelperPadrao.padronizaCor(corJogador2), this.pecasCor(corJogador2));
         this.vezJogador = HelperPadrao.ehBranco(corJogador1) ? 0 : 1;
         this.tabuleiro = new Tabuleiro();
         this.posicionaPecas();
@@ -107,6 +103,17 @@ public class Jogo {
 
     public void alteraVezJogador() {
         this.vezJogador = this.vezJogador == 1 ? 0 : 1;
+    }
+
+    /**
+     * Retorna um vetor com as peças da cor especificada
+     * 
+     * @param cor
+     * @return
+     */
+    private Peca[] pecasCor(char cor) {
+        return HelperPadrao.ehBranco(cor) ? Arrays.copyOfRange(this.pecas, 0, 15)
+                : Arrays.copyOfRange(this.pecas, 16, 32);
     }
 
     /**
