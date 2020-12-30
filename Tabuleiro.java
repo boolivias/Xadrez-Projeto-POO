@@ -135,18 +135,26 @@ public class Tabuleiro {
     }
 
     /**
-     * Ocupa a posição com a peça passada por parâmetro
+     * Ocupa a posição com a peça passada por parâmetro, se houver outra peça na
+     * posição de destino, ela fica inativa
      * 
      * @param linhaDestino  <code>int</code> - Linha da posição a ser ocupada
      * @param colunaDestino <code>char</code> - Coluna da posição a ser ocupada
      * @param p             <code>Peca</code> - Peça a ocupar a posição
      */
     public void definePecaPosicao(int linhaDestino, char colunaDestino, Peca p) {
-        this.posicao[linhaDestino][HelperPadrao.colunaCharToInt(colunaDestino)].ocupa(p);
+        Posicao pos = this.posicao[linhaDestino][HelperPadrao.colunaCharToInt(colunaDestino)];
+        if (pos.ehOcupada()) {
+            pos.getPecaPresente().desativa();
+            pos.desocupa();
+        }
+
+        pos.ocupa(p);
     }
 
     /**
-     * Movimenta a peça da posição especificada
+     * Movimenta a peça da posição especificada, se houver peça no destino, ela é
+     * capturada
      * 
      * @param linhaOrigem   <code>int</code> - Linha da posição onde está a peça
      * @param colunaOrigem  <code>char</code> - Coluna da posição onde está a peça
@@ -154,9 +162,12 @@ public class Tabuleiro {
      * @param colunaDestino <code>char</code> - Coluna da posição destino da peça
      */
     public void definePecaPosicao(int linhaOrigem, char colunaOrigem, int linhaDestino, char colunaDestino) {
-        this.definePecaPosicao(linhaDestino, colunaDestino,
-                this.posicao[linhaOrigem][HelperPadrao.colunaCharToInt(colunaOrigem)].getPecaPresente());
+        Peca p = this.posicao[linhaOrigem][HelperPadrao.colunaCharToInt(colunaOrigem)].getPecaPresente();
         this.definePecaPosicao(linhaOrigem, colunaOrigem);
+        this.definePecaPosicao(linhaDestino, colunaDestino, p);
+
+        if (p instanceof Peao)
+            ((Peao) p).moveu();
     }
 
     /**
