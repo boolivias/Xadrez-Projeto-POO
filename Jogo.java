@@ -93,11 +93,11 @@ public class Jogo {
             linhaDestino = HelperPadrao.linhaCharToInt(destino.charAt(1));
             colunaDestino = destino.charAt(0);
 
-            movimentou = this.tabuleiro.checaMovimento(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino);
-            if (!movimentou) {
+            if (this.tabuleiro.checaMovimento(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino)) {
+                this.tabuleiro.definePecaPosicao(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino);
+                movimentou = true;
+            } else
                 System.out.println("Jogada incorreta! Tente novamente.");
-            }
-
         } while (!movimentou);
     }
 
