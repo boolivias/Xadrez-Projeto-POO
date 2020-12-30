@@ -61,16 +61,6 @@ public class Tabuleiro {
             } while (pos_atual != pos_destino);
         }
 
-        if (p_destino != null) {
-            p_destino.desativa();
-            this.definePecaPosicao(pos_destino.getLinha(), pos_destino.getColuna());
-        }
-        this.definePecaPosicao(pos_origem.getLinha(), pos_origem.getColuna(), pos_destino.getLinha(),
-                pos_destino.getColuna());
-
-        if (p instanceof Peao)
-            ((Peao) p).moveu();
-
         return true;
     }
 
