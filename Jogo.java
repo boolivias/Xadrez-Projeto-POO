@@ -24,8 +24,10 @@ public class Jogo {
     public Jogo(String nomeJogador1, String nomeJogador2, char corJogador1, char corJogador2) {
         this.pecas = criaPecas();
         this.jogadores = new Jogador[2];
-        jogadores[0] = new Jogador(nomeJogador1, HelperPadrao.padronizaCor(corJogador1), this.pecasCor(corJogador1));
-        jogadores[1] = new Jogador(nomeJogador2, HelperPadrao.padronizaCor(corJogador2), this.pecasCor(corJogador2));
+        jogadores[0] = new Jogador(nomeJogador1, HelperPadrao.padronizaCor(corJogador1),
+                this.pecasCor(corJogador1, false));
+        jogadores[1] = new Jogador(nomeJogador2, HelperPadrao.padronizaCor(corJogador2),
+                this.pecasCor(corJogador2, false));
         this.vezJogador = HelperPadrao.ehBranco(corJogador1) ? 0 : 1;
         this.tabuleiro = new Tabuleiro();
         this.posicionaPecas();
