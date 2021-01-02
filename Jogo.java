@@ -7,6 +7,7 @@
  * @author Jean Wylmer Flores Mendoza
  */
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 import Pecas.*;
@@ -37,18 +38,23 @@ public class Jogo {
         int op;
         Scanner sc = new Scanner(System.in);
         do {
+            op = 0;
+            this.verificaVitoria();
+            System.out.println("Status: " + this.statusToString());
             System.out.println("Ação do jogador: " + this.vezJogador().getNome());
-            System.out.println("\t1 - Realizar uma jogada\n\t0 - Abandonar o Jogo");
-            System.out.print("Escolha uma opção: ");
-            op = sc.nextInt();
-            switch (op) {
-                case 1:
-                    this.jogada();
-                    this.alteraVezJogador();
-                    break;
+            if (this.status != Constantes.FIM) {
+                System.out.println("\t1 - Realizar uma jogada\n\t0 - Abandonar o Jogo");
+                System.out.print("Escolha uma opção: ");
+                op = sc.nextInt();
+                switch (op) {
+                    case 1:
+                        this.jogada();
+                        this.alteraVezJogador();
+                        break;
 
-                default:
-                    break;
+                    default:
+                        break;
+                }
             }
         } while (op != 0);
     }
@@ -95,6 +101,7 @@ public class Jogo {
             } else
                 System.out.println("Jogada incorreta! Tente novamente.");
         } while (!movimentou);
+        this.atualizaStatus();
     }
 
     public Jogador vezJogador() {
@@ -174,6 +181,76 @@ public class Jogo {
             default:
                 return "";
         }
+    }
+
+    /**
+     * Verifica se o jogador da cor especificada está em xeque mate
+     * 
+     * @param cor
+     * @return
+     */
+    private boolean verificaXequeMate(char cor) {
+        Peca[] pecas_jogador = pecasCor(cor, false);
+        Peca[] pecas_adversario = pecasCor(HelperPadrao.ehBranco(cor) ? Constantes.COR_PRETO : Constantes.COR_BRANCO,
+                false);
+        Peca rei = rei(cor);
+        Posicao pos_rei = this.tabuleiro.posicaoPeca(rei);
+
+        if (!this.tabuleiro.podeSerAtacada(pos_rei, pecas_adversario))
+            return false;
+
+        for (int i = pos_rei.getLinha() - 1; i <= pos_rei.getLinha() + 1; i++) {
+            for (int j = HelperPadrao.colunaCharToInt(pos_rei.getColuna()) - 1; j <= HelperPadrao
+                    .colunaCharToInt(pos_rei.getColuna()) + 1; j++) {
+                if (this.tabuleiro.checaMovimento(pos_rei.getLinha(), pos_rei.getColuna(), i,
+                        HelperPadrao.colunaIntToChar(j))) {
+                    if (this.tabuleiro.podeSerAtacada(i, HelperPadrao.colunaIntToChar(j), pecas_adversario))
+                        for (Peca p : pecas_jogador) {
+                            if (!(p instanceof Rei)) {
+                                Posicao pos_origem = this.tabuleiro.posicaoPeca(p);
+                                if (this.tabuleiro.checaMovimento(pos_origem.getLinha(), pos_origem.getColuna(), i,
+                                        HelperPadrao.colunaIntToChar(j)))
+                                    return false;
+                            }
+                        }
+                    else
+                        return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Verifica se o jogador da cor especificada está em xeque
+     * 
+     * @param cor
+     * @return
+     */
+    private boolean verificaXeque(char cor) {
+        Peca[] pecas = pecasCor(HelperPadrao.ehBranco(cor) ? Constantes.COR_PRETO : Constantes.COR_BRANCO, false);
+        Peca rei = rei(cor);
+        if (this.tabuleiro.podeSerAtacada(this.tabuleiro.posicaoPeca(rei), pecas))
+            return true;
+
+        return false;
+    }
+
+    /**
+     * Retorna o rei da cor especificada
+     * 
+     * @param cor
+     * @return
+     */
+    private Peca rei(char cor) {
+        Peca[] pecas = pecasCor(cor, true);
+        for (Peca peca : pecas) {
+            if (peca instanceof Rei)
+                return peca;
+        }
+
+        return null;
     }
 
     /**
