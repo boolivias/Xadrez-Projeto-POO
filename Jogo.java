@@ -105,74 +105,75 @@ public class Jogo {
         this.vezJogador = this.vezJogador == 1 ? 0 : 1;
     }
 
-    /**
-     * Verifica se o jogador da cor especificada está em xeque mate
-     * 
-     * @param cor
-     * @return
-     */
-    private boolean verificaXequeMate(char cor) {
-        Peca[] pecas_jogador = pecasCor(cor, false);
-        Peca[] pecas_adversario = pecasCor(HelperPadrao.ehBranco(cor) ? Constantes.COR_PRETO : Constantes.COR_BRANCO,
-                false);
-        Peca rei = rei(cor);
-        Posicao pos_rei = this.tabuleiro.posicaoPeca(rei);
+    public void verificaVitoria() {
+        char cor_jogador = this.vezJogador().getCor();
+        if (this.status == Constantes.XEQUE_MATE_BRANCO || this.status == Constantes.XEQUE_MATE_PRETO
+                || (this.status == Constantes.XEQUE_BRANCO && !HelperPadrao.ehBranco(cor_jogador))
+                || (this.status == Constantes.XEQUE_PRETO && HelperPadrao.ehBranco(cor_jogador))) {
 
-        if (!this.tabuleiro.podeSerAtacada(pos_rei, pecas_adversario))
-            return false;
+            if ((this.status == Constantes.XEQUE_MATE_BRANCO && !HelperPadrao.ehBranco(cor_jogador))
+                    || (this.status == Constantes.XEQUE_MATE_PRETO && HelperPadrao.ehBranco(cor_jogador)))
+                this.alteraVezJogador();
 
-        for (int i = pos_rei.getLinha() - 1; i <= pos_rei.getLinha() + 1; i++) {
-            for (int j = HelperPadrao.colunaCharToInt(pos_rei.getColuna()) - 1; j <= HelperPadrao
-                    .colunaCharToInt(pos_rei.getColuna()) + 1; j++) {
-                if (this.tabuleiro.checaMovimento(pos_rei.getLinha(), pos_rei.getColuna(), i,
-                        HelperPadrao.colunaIntToChar(j))) {
-                    if (this.tabuleiro.podeSerAtacada(i, HelperPadrao.colunaIntToChar(j), pecas_adversario))
-                        for (Peca p : pecas_jogador) {
-                            if (!(p instanceof Rei)) {
-                                Posicao pos_origem = this.tabuleiro.posicaoPeca(p);
-                                if (this.tabuleiro.checaMovimento(pos_origem.getLinha(), pos_origem.getColuna(), i,
-                                        HelperPadrao.colunaIntToChar(j)))
-                                    return false;
-                            }
-                        }
-                    else
-                        return false;
-                }
-            }
+            this.status = Constantes.FIM;
+            System.out.println("O jogador " + this.vezJogador().getNome() + " Venceu!");
+
+            System.exit(0);
+        }
+    }
+
+    public void atualizaStatus() {
+        if (verificaXequeMate(Constantes.COR_BRANCO)) {
+            this.status = Constantes.XEQUE_MATE_BRANCO;
+            return;
         }
 
-        return true;
+        if (verificaXequeMate(Constantes.COR_PRETO)) {
+            this.status = Constantes.XEQUE_MATE_PRETO;
+            return;
+        }
+
+        if (verificaXeque(Constantes.COR_BRANCO)) {
+            this.status = Constantes.XEQUE_BRANCO;
+            return;
+        }
+
+        if (verificaXeque(Constantes.COR_PRETO)) {
+            this.status = Constantes.XEQUE_PRETO;
+            return;
+        }
+
+        this.status = Constantes.ANDAMENTO;
     }
 
     /**
-     * Verifica se o jogador da cor especificada está em xeque
+     * Retorna uma string de acordo com o status atual da partida.
      * 
-     * @param cor
      * @return
      */
-    private boolean verificaXeque(char cor) {
-        Peca[] pecas = pecasCor(HelperPadrao.ehBranco(cor) ? Constantes.COR_PRETO : Constantes.COR_BRANCO, false);
-        Peca rei = rei(cor);
-        if (this.tabuleiro.podeSerAtacada(this.tabuleiro.posicaoPeca(rei), pecas))
-            return true;
+    public String statusToString() {
+        switch (this.status) {
+            case Constantes.ANDAMENTO:
+                return "Em andamento";
 
-        return false;
-    }
+            case Constantes.FIM:
+                return "Jogo encerrado";
 
-    /**
-     * Retorna o rei da cor especificada
-     * 
-     * @param cor
-     * @return
-     */
-    private Peca rei(char cor) {
-        Peca[] pecas = pecasCor(cor, true);
-        for (Peca peca : pecas) {
-            if (peca instanceof Rei)
-                return peca;
+            case Constantes.XEQUE_PRETO:
+                return "Jogador preto em xeque";
+
+            case Constantes.XEQUE_BRANCO:
+                return "Jogador branco em xeque";
+
+            case Constantes.XEQUE_MATE_PRETO:
+                return "Jogador preto em xeque mate";
+
+            case Constantes.XEQUE_MATE_BRANCO:
+                return "Jogador branco em xeque mate";
+
+            default:
+                return "";
         }
-
-        return null;
     }
 
     /**
