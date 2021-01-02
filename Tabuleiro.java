@@ -133,6 +133,17 @@ public class Tabuleiro {
                 && linha <= 7);
     }
 
+    public Posicao posicaoPeca(Peca p) {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (this.posicao[i][j].ehOcupada() && this.posicao[i][j].getPecaPresente() == p)
+                    return this.posicao[i][j];
+            }
+        }
+
+        return null;
+    }
+
     /**
      * Desocupa a posição
      * 
