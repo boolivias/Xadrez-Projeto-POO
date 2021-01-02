@@ -109,11 +109,23 @@ public class Jogo {
      * Retorna um vetor com as peças da cor especificada
      * 
      * @param cor
+     * @param desativadas <code>boolean</code> - Se <code>true</code> retorna as
+     *                    peças desativadas também, se <code>false</code> retorna
+     *                    somente as ativas
      * @return
      */
-    private Peca[] pecasCor(char cor) {
-        return HelperPadrao.ehBranco(cor) ? Arrays.copyOfRange(this.pecas, 0, 15)
+    private Peca[] pecasCor(char cor, boolean desativadas) {
+        Peca[] pecas = HelperPadrao.ehBranco(cor) ? Arrays.copyOfRange(this.pecas, 0, 15)
                 : Arrays.copyOfRange(this.pecas, 16, 32);
+        if (desativadas)
+            return pecas;
+
+        ArrayList<Peca> pecasAtivas = new ArrayList();
+        for (Peca p : pecas) {
+            if (p.estaAtivo())
+                pecasAtivas.add(p);
+        }
+        return pecasAtivas.toArray(new Peca[pecasAtivas.size()]);
     }
 
     /**
