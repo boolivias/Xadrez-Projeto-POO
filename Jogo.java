@@ -73,9 +73,11 @@ public class Jogo {
             while (pecaOrigem == null) {
                 System.out.print("Digite a posição da peça que quer mover (exemplo: D7): ");
                 origem = sc.next();
-                linhaOrigem = HelperPadrao.linhaCharToInt(origem.charAt(1));
-                colunaOrigem = origem.charAt(0);
-                pecaOrigem = this.tabuleiro.temPeca(linhaOrigem, colunaOrigem);
+                if (origem.length() == 2) {
+                    linhaOrigem = HelperPadrao.linhaCharToInt(origem.charAt(1));
+                    colunaOrigem = origem.charAt(0);
+                    pecaOrigem = this.tabuleiro.temPeca(linhaOrigem, colunaOrigem);
+                }
                 if (pecaOrigem == null) {
                     System.out.println("Não foi possível encontrar uma peça nessa posição, tente novmante.");
                     continue;
@@ -86,9 +88,14 @@ public class Jogo {
                 }
             }
 
-            System.out.println("Digite:");
-            System.out.println("\t- A posição de destino (exemplo: D7)\n\t- \"0\" para escolher nova peça para mover");
-            destino = sc.next();
+            do {
+                System.out.println("Digite:");
+                System.out.println(
+                        "\t- A posição de destino (exemplo: D7)\n\t- \"0\" para escolher nova peça para mover");
+                destino = sc.next();
+                if (destino.length() != 2 && !destino.equals("0"))
+                    System.out.println("Posição incorreta. Tente novamente.");
+            } while (destino.length() == 2 || destino.equals("0"));
             if (destino.equals("0")) {
                 pecaOrigem = null;
                 continue;
