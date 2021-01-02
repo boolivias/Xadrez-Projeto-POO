@@ -133,6 +133,41 @@ public class Tabuleiro {
                 && linha <= 7);
     }
 
+    /**
+     * Verifica se a posição passada pode ser atacada pelas peças determinadas por
+     * parâmetro
+     * 
+     * @param pos <code>Posicao</code> - Posição a ser verificada
+     * @param p   <code>Peca[]</code> - Vetor de peças para verificar se podem
+     *            atacar a posição
+     */
+    public boolean podeSerAtacada(Posicao pos, Peca[] p) {
+        Posicao pos_origem;
+        for (Peca peca : p) {
+            pos_origem = this.posicaoPeca(peca);
+            if (this.checaMovimento(pos_origem.getLinha(), pos_origem.getColuna(), pos.getLinha(), pos.getColuna()))
+                return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Verifica se a posição passada pode ser atacada pelas peças determinadas por
+     * parâmetro
+     * 
+     * @param linha
+     * @param col
+     * @param p
+     * @return
+     */
+    public boolean podeSerAtacada(int linha, char col, Peca[] p) {
+        if (!this.dentroLimiteTabuleiro(linha, col))
+            return false; // ============== LANÇAR EXCEÇÃO
+
+        return this.podeSerAtacada(this.posicao[linha][HelperPadrao.colunaCharToInt(col)], p);
+    }
+
     public Posicao posicaoPeca(Peca p) {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
