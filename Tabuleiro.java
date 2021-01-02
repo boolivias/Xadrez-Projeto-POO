@@ -48,9 +48,15 @@ public class Tabuleiro {
         if (p_destino != null && HelperPadrao.corIgual(p.getCor(), p_destino.getCor()))
             return false;
 
+        if (p instanceof Peao && p_destino != null)
+            ((Peao) p).ativaMovimentoCaptura();
+
         if (!p.checaMovimento(pos_origem.getLinha(), pos_origem.getColuna(), pos_destino.getLinha(),
-                pos_destino.getColuna()))
+                pos_destino.getColuna())) {
+            if (p instanceof Peao && p_destino != null)
+                ((Peao) p).desativaMovimentoCaptura();
             return false;
+        }
 
         if (!(p instanceof Cavalo)) { // Cavalo pula as peças no caminho
             Posicao pos_atual = pos_origem;
@@ -71,8 +77,11 @@ public class Tabuleiro {
                         dest.getColuna());
 
             case "Pecas.Peao":
-                return this.proximaPosicaoVertical(atual.getLinha(), atual.getColuna(), dest.getLinha(),
-                        dest.getColuna());
+                return ((Peao) p).getMovimentoCaptura() && Math.abs(atual.getLinha() - dest.getLinha()) > 0
+                        ? this.proximaPosicaoDiagonal(atual.getLinha(), atual.getColuna(), dest.getLinha(),
+                                dest.getColuna())
+                        : this.proximaPosicaoVertical(atual.getLinha(), atual.getColuna(), dest.getLinha(),
+                                dest.getColuna());
 
             case "Pecas.Torre":
                 if (atual.getColuna() == dest.getColuna())
