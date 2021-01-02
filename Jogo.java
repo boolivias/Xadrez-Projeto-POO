@@ -22,6 +22,8 @@ public class Jogo {
     private int status;
 
     public Jogo(String nomeJogador1, String nomeJogador2, char corJogador1, char corJogador2) {
+        if (HelperPadrao.corIgual(corJogador1, corJogador2))
+            throw new IllegalArgumentException("As cores dos jogadores devem ser distintas");
         this.pecas = criaPecas();
         this.jogadores = new Jogador[2];
         jogadores[0] = new Jogador(nomeJogador1, HelperPadrao.padronizaCor(corJogador1),
