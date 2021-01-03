@@ -58,9 +58,9 @@ public class Posicao {
      * @param peca   <code>peca</code> - Peça presente na posição
      */
     private void _constructor(int linha, int coluna, char cor, Peca peca) {
-        if (linha < 0 || linha > 7 || coluna < 0 || coluna > 7)
-            throw new IllegalArgumentException("Linha e/ou coluna inválidas");
         this.coluna = (char) coluna;
+        if (linha < 0 || linha > 7 || this.coluna < 'A' || this.coluna > 'H')
+            throw new IllegalArgumentException("Linha e/ou coluna inválidas");
         this.linha = linha;
         this.cor = HelperPadrao.padronizaCor(cor);
         this.pecaPresente = peca;

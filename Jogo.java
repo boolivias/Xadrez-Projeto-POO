@@ -27,14 +27,13 @@ public class Jogo {
         this.pecas = criaPecas();
         this.jogadores = new Jogador[2];
         jogadores[0] = new Jogador(nomeJogador1, HelperPadrao.padronizaCor(corJogador1),
-                this.pecasCor(corJogador1, false));
+                this.pecasCor(corJogador1, true));
         jogadores[1] = new Jogador(nomeJogador2, HelperPadrao.padronizaCor(corJogador2),
-                this.pecasCor(corJogador2, false));
+                this.pecasCor(corJogador2, true));
         this.vezJogador = HelperPadrao.ehBranco(corJogador1) ? 0 : 1;
         this.tabuleiro = new Tabuleiro();
         this.posicionaPecas();
         this.status = 0;
-        this.run();
     }
 
     /** Começa a execução do jogo, lê as entradas dos jogadores e age de acordo. */
@@ -97,7 +96,7 @@ public class Jogo {
                 destino = sc.next();
                 if (destino.length() != 2 && !destino.equals("0"))
                     System.out.println("Posição incorreta. Tente novamente.");
-            } while (destino.length() == 2 || destino.equals("0"));
+            } while (destino.length() != 2 && !destino.equals("0"));
             if (destino.equals("0")) {
                 pecaOrigem = null;
                 continue;
@@ -123,6 +122,10 @@ public class Jogo {
         this.vezJogador = this.vezJogador == 1 ? 0 : 1;
     }
 
+    /**
+     * Verifica se algum dos jogadores venceu, caso sim, imprime o vitorioso e
+     * encerra a execução
+     */
     public void verificaVitoria() {
         char cor_jogador = this.vezJogador().getCor();
         if (this.status == Constantes.XEQUE_MATE_BRANCO || this.status == Constantes.XEQUE_MATE_PRETO
@@ -190,7 +193,7 @@ public class Jogo {
                 return "Jogador branco em xeque mate";
 
             default:
-                return "";
+                throw new Error("Status indefinido");
         }
     }
 
@@ -274,12 +277,12 @@ public class Jogo {
      * @return
      */
     private Peca[] pecasCor(char cor, boolean desativadas) {
-        Peca[] pecas = HelperPadrao.ehBranco(cor) ? Arrays.copyOfRange(this.pecas, 0, 15)
+        Peca[] pecas = HelperPadrao.ehBranco(cor) ? Arrays.copyOfRange(this.pecas, 0, 16)
                 : Arrays.copyOfRange(this.pecas, 16, 32);
         if (desativadas)
             return pecas;
 
-        ArrayList<Peca> pecasAtivas = new ArrayList();
+        ArrayList<Peca> pecasAtivas = new ArrayList<Peca>();
         for (Peca p : pecas) {
             if (p.estaAtivo())
                 pecasAtivas.add(p);

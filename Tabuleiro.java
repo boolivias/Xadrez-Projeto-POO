@@ -36,10 +36,14 @@ public class Tabuleiro {
      *         <b>false</b> se inválido
      */
     public boolean checaMovimento(int linhaOrigem, char colunaOrigem, int linhaDestino, char colunaDestino) {
+        if (!this.dentroLimiteTabuleiro(linhaDestino, colunaDestino)
+                || !this.dentroLimiteTabuleiro(linhaOrigem, colunaOrigem))
+            return false;
+
         Posicao pos_origem = this.posicao[linhaOrigem][HelperPadrao.colunaCharToInt(colunaOrigem)];
         Posicao pos_destino = this.posicao[linhaDestino][HelperPadrao.colunaCharToInt(colunaDestino)];
 
-        if (!this.dentroLimiteTabuleiro(pos_destino.getLinha(), pos_destino.getColuna()) || pos_origem == pos_destino)
+        if (pos_origem == pos_destino)
             return false;
 
         Peca p = pos_origem.getPecaPresente();

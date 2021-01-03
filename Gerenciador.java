@@ -20,6 +20,7 @@ public class Gerenciador {
         char cor_jogador1 = op_cor == 1 ? Constantes.COR_BRANCO : Constantes.COR_PRETO;
         char cor_jogador2 = op_cor == 1 ? Constantes.COR_PRETO : Constantes.COR_BRANCO;
         Jogo jogo = new Jogo(n_jogador1, n_jogador2, cor_jogador1, cor_jogador2);
+        jogo.run();
     }
 
 }
