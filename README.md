@@ -4,14 +4,14 @@
 
 Tópicos
 =================
-   * [Sobre o projeto](#-sobre-o-projeto)
-   * [Features](#-features)
-   * [Como executar o jogo](#-como-executar-o-jogo)
-     * [Pré-requisitos](#-pré-requisitos)
-     * [Executando o jogo](#-executando-o-jogo)
-     * [Como jogar](#-como-jogar)
-   * [Customizar](#-customização)
-   * [Autor](#-autor)
+   * [Sobre o projeto](#sobre-o-projeto)
+   * [Features](#features)
+   * [Como executar o jogo](#como-executar-o-jogo)
+     * [Pré-requisitos](#pré-requisitos)
+     * [Executando o jogo](#executando-o-jogo)
+     * [Como jogar](#como-jogar)
+   * [Customizar](#customização)
+   * [Autor](#autor)
 
 ## Sobre o projeto
 
