@@ -7,6 +7,7 @@
  */
 
 import Pecas.Peca;
+import Util.HelperPadrao;
 
 public class Jogador {
     private String nome;
@@ -14,8 +15,12 @@ public class Jogador {
     private Peca pecas[];
 
     public Jogador(String nome, char cor, Peca p[]) {
+        if (nome.length() <= 0)
+            throw new IllegalArgumentException("O nome do jogador deve ser válido.");
+        if (p.length == 16)
+            throw new IllegalArgumentException("O jogador deve ter 16 peças");
         this.nome = nome;
-        this.cor = cor;
+        this.cor = HelperPadrao.padronizaCor(cor);
         this.pecas = p;
     }
 

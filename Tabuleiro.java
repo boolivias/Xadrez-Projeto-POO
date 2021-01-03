@@ -43,6 +43,8 @@ public class Tabuleiro {
             return false;
 
         Peca p = pos_origem.getPecaPresente();
+        if (p == null)
+            throw new Error("Não há peça na posição de origem");
         Peca p_destino = pos_destino.getPecaPresente();
 
         if (p_destino != null && HelperPadrao.corIgual(p.getCor(), p_destino.getCor()))
@@ -104,8 +106,7 @@ public class Tabuleiro {
                             dest.getColuna());
 
             default:
-                // ----------------> LANÇAR EXCEPTION
-                return null;
+                throw new Error("Peça não definida");
         }
     }
 
@@ -142,6 +143,8 @@ public class Tabuleiro {
      *            atacar a posição
      */
     public boolean podeSerAtacada(Posicao pos, Peca[] p) {
+        if (pos == null)
+            throw new Error("Posição nula.");
         Posicao pos_origem;
         for (Peca peca : p) {
             pos_origem = this.posicaoPeca(peca);
@@ -163,7 +166,7 @@ public class Tabuleiro {
      */
     public boolean podeSerAtacada(int linha, char col, Peca[] p) {
         if (!this.dentroLimiteTabuleiro(linha, col))
-            return false; // ============== LANÇAR EXCEÇÃO
+            throw new Error("Linha e/ou coluna fora do limite do tabuleiro.");
 
         return this.podeSerAtacada(this.posicao[linha][HelperPadrao.colunaCharToInt(col)], p);
     }
@@ -186,6 +189,9 @@ public class Tabuleiro {
      * @param colunaDestino <code>int</code> - Coluna da posição a ser desocupada
      */
     public void definePecaPosicao(int linhaDestino, char colunaDestino) {
+        if (!this.dentroLimiteTabuleiro(linhaDestino, colunaDestino))
+            throw new Error("Linha e/ou coluna fora do limite do tabuleiro.");
+
         this.posicao[linhaDestino][HelperPadrao.colunaCharToInt(colunaDestino)].desocupa();
     }
 
@@ -198,6 +204,9 @@ public class Tabuleiro {
      * @param p             <code>Peca</code> - Peça a ocupar a posição
      */
     public void definePecaPosicao(int linhaDestino, char colunaDestino, Peca p) {
+        if (!this.dentroLimiteTabuleiro(linhaDestino, colunaDestino))
+            throw new Error("Linha e/ou coluna fora do limite do tabuleiro.");
+
         Posicao pos = this.posicao[linhaDestino][HelperPadrao.colunaCharToInt(colunaDestino)];
         if (pos.ehOcupada()) {
             pos.getPecaPresente().desativa();
@@ -217,6 +226,12 @@ public class Tabuleiro {
      * @param colunaDestino <code>char</code> - Coluna da posição destino da peça
      */
     public void definePecaPosicao(int linhaOrigem, char colunaOrigem, int linhaDestino, char colunaDestino) {
+        if (!this.dentroLimiteTabuleiro(linhaOrigem, colunaOrigem)
+                || !this.dentroLimiteTabuleiro(linhaDestino, colunaDestino))
+            throw new Error("Linha e/ou coluna fora do limite do tabuleiro.");
+        if (!this.posicao[linhaOrigem][HelperPadrao.colunaCharToInt(colunaOrigem)].ehOcupada())
+            throw new IllegalArgumentException("Posição de origem não possui peça para mover");
+
         Peca p = this.posicao[linhaOrigem][HelperPadrao.colunaCharToInt(colunaOrigem)].getPecaPresente();
         this.definePecaPosicao(linhaOrigem, colunaOrigem);
         this.definePecaPosicao(linhaDestino, colunaDestino, p);

@@ -8,7 +8,10 @@ import Util.Constantes;
 
 public class HelperPadrao {
     public static char padronizaCharColuna(char col) {
-        return Character.toUpperCase(col);
+        char coluna = Character.toUpperCase(col);
+        if (coluna < 'A' || coluna > 'H')
+            throw new Error("Coluna inválida");
+        return coluna;
     }
 
     public static char colunaIntToChar(int col) {
@@ -20,18 +23,23 @@ public class HelperPadrao {
     }
 
     public static int linhaCharToInt(char lin) {
-        return ((int) lin) - Constantes.ZERO_ASCII - 1;
+        int linha = ((int) lin) - Constantes.ZERO_ASCII - 1;
+        if (linha < 0 || linha > 7)
+            throw new Error("Linha inválida");
+        return linha;
     }
 
     public static char padronizaCor(char cor) {
-        if (cor == 'p' || cor == 'P')
+        if (Character.toUpperCase(cor) == 'P')
             return Constantes.COR_PRETO;
-        else
+        if (Character.toUpperCase(cor) == 'B')
             return Constantes.COR_BRANCO;
+
+        throw new Error("Cor inválida");
     }
 
     public static boolean ehBranco(char cor) {
-        return Character.toLowerCase(cor) == Constantes.COR_BRANCO;
+        return padronizaCor(cor) == Constantes.COR_BRANCO;
     }
 
     public static boolean corIgual(char cor1, char cor2) {

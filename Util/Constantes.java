@@ -7,6 +7,14 @@ package Util;
  */
 
 public class Constantes {
+    // ---------------> Status do jogo
+    public final static int ANDAMENTO = 0;
+    public final static int FIM = 1;
+    public final static int XEQUE_PRETO = 2;
+    public final static int XEQUE_BRANCO = 3;
+    public final static int XEQUE_MATE_PRETO = 4;
+    public final static int XEQUE_MATE_BRANCO = 5;
+
     // ---------------> Código ascii dos números
     public final static int ZERO_ASCII = 48;
 

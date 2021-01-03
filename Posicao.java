@@ -36,6 +36,8 @@ public class Posicao {
     }
 
     public void ocupa(Peca p) {
+        if (p == null)
+            throw new IllegalArgumentException("Peça não deve ser nula.");
         this.pecaPresente = p;
     }
 
@@ -56,6 +58,8 @@ public class Posicao {
      * @param peca   <code>peca</code> - Peça presente na posição
      */
     private void _constructor(int linha, int coluna, char cor, Peca peca) {
+        if (linha < 0 || linha > 7 || coluna < 0 || coluna > 7)
+            throw new IllegalArgumentException("Linha e/ou coluna inválidas");
         this.coluna = (char) coluna;
         this.linha = linha;
         this.cor = HelperPadrao.padronizaCor(cor);
